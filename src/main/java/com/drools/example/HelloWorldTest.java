@@ -25,7 +25,7 @@ public class HelloWorldTest {
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession session = kContainer.newKieSession("ksession-rules");
         HelloWorld helloWorld = new HelloWorld();
-        helloWorld.setPrintMessage("Hello World");
+        helloWorld.setPrintMessage("buuuuu");
         session.insert(helloWorld);
         session.fireAllRules();
     }
