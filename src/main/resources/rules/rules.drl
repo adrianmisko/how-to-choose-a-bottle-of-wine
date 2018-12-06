@@ -1,8 +1,23 @@
-package com.drools.example
-rule "Hello World"
-when
-    helloWorldObject: HelloWorld()
-then
-    helloWorldObject.showMessage();
-    System.out.print(" from Drools!");
+package sample;
+
+rule "Who"
+    when
+
+    then
+        System.out.print("Who's drinking it?\n");
+end
+
+rule "Personal use"
+    when
+        message: Fact(text == "Personal use")
+    then
+        System.out.print("Are you at home?\n");
+end
+
+
+rule "Someone else"
+    when
+        message: Fact(text == "Someone else")
+    then
+        System.out.print("Are you at social gathering?\n");
 end
