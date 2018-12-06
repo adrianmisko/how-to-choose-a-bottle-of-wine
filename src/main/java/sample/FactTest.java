@@ -17,8 +17,7 @@ public class FactTest {
         factTest.executeMessage();
     }
 
-    public void executeMessage() throws IOException,
-            DroolsParserException {
+    public void executeMessage() {
         KieServices ks = KieServices.Factory.get();
         BasicConfigurator.configure();
         Logger.getLogger(FactTest.class).setLevel(Level.OFF);
