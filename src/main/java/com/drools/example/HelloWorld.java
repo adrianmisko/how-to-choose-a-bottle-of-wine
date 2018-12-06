@@ -8,7 +8,7 @@ public class HelloWorld {
         return printMessage;
     }
 
-    public void setPrintMessage(String printMessage) {
+    void setPrintMessage(String printMessage) {
         this.printMessage = printMessage;
     }
 
