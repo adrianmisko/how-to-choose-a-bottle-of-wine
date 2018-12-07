@@ -22,22 +22,10 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
     }
-
-
 
     public static void main(String[] args) {
-
-        KieServices ks = KieServices.Factory.get();
-        BasicConfigurator.configure();
-        Logger.getLogger(Main.class).setLevel(Level.OFF);
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession session = kContainer.newKieSession("ksession-rules");
-
-        session.fireAllRules();
-
         launch(args);
-
     }
+
 }
