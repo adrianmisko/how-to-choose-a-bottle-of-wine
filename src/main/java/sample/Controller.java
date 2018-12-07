@@ -21,6 +21,7 @@ public class Controller {
         Logger.getLogger(Main.class).setLevel(Level.OFF);
         KieContainer kContainer = ks.getKieClasspathContainer();
         session = kContainer.newKieSession("ksession-rules");
+        session.setGlobal("controller", this);
         session.fireAllRules();
     }
 
