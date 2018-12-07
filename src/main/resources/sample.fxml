@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-
-<GridPane alignment="center" hgap="10" maxHeight="400.0" maxWidth="600.0" minHeight="100.0" minWidth="150.0" prefHeight="400.0" prefWidth="600.0" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" maxHeight="400.0" maxWidth="600.0" minHeight="100.0" minWidth="150.0" prefHeight="400.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <JFXButton mnemonicParsing="false" prefHeight="42.0" prefWidth="350.0" styleClass="button-raised" text="Click me" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+   </children>
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
 </GridPane>
