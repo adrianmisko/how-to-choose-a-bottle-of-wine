@@ -28,7 +28,6 @@ public class Controller implements Initializable {
     private List<JFXButton> buttons;
 
     private KieSession session;
-    private Question currentQuestion;
 
     public Controller() {}
 
@@ -48,7 +47,7 @@ public class Controller implements Initializable {
     }
 
     public void getNewQuestion(Question question) {
-        currentQuestion = question;
+
         label.setText(question.getText());
 
         pane.getChildren().removeAll(buttons);
@@ -57,12 +56,15 @@ public class Controller implements Initializable {
         for (int i = 0; i < question.getPossibleAnswers().size(); i++) {    //jakoś ładniej musi być
             String possibleAnswer = question.getPossibleAnswers().get(i);
             JFXButton button = new JFXButton(possibleAnswer);
+            button.setMaxWidth(Double.MAX_VALUE);
+            button.setMaxHeight(Double.MAX_VALUE);
+            button.getStyleClass().add("button-raised");
             button.setOnAction(action -> {
                 session.insert(new Answer(possibleAnswer));
                 session.fireAllRules();
             });
             buttons.add(button);
-            pane.add(button, 1, i*2 + 4, 8, 3);
+            pane.add(button, 1, i*3 + 3, 6, 2);
         }
 
     }
