@@ -1,4 +1,5 @@
 package sample;
+import java.sql.SQLOutput
 
 global Controller controller;
 
@@ -6,20 +7,29 @@ rule "Who"
     when
 
     then
-        System.out.print("Who's drinking it?\n");
+        Question question = new Question("Who is it for?");
+        question.getPossibleAnswers().add("Personal use");
+        question.getPossibleAnswers().add("Someone else");
+        controller.getNewQuestion(question);
 end
 
 rule "Personal use"
     when
-        message: Fact(text == "Personal use")
+        a: Answer(text == "Personal use")       //to nie przejdzie
     then
-        System.out.print("Are you at home?\n");
+        Question question = new Question("Are you at home?");
+          question.getPossibleAnswers().add("Yes");
+                question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
 end
 
 
 rule "Someone else"
     when
-        message: Fact(text == "Someone else")
+        a: Answer(text == "Someone else")
     then
-        System.out.print("Are you at social gathering?\n");
+        Question question = new Question("Are you at social gathering?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
 end
