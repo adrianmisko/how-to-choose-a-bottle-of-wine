@@ -1,7 +1,12 @@
 package sample;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -9,13 +14,30 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-public class Controller {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
 
     @FXML
-    private JFXButton button;
-    private KieSession session;
+    private GridPane pane;
+    @FXML
+    private Label label;
+    private List<JFXButton> buttons;
 
-    public Controller() {
+    private KieSession session;
+    private Question currentQuestion;
+
+    public Controller() {}
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        GridPane.setFillWidth(label, true);
+        GridPane.setFillHeight(label, true);
+        buttons = new ArrayList<>();
+
         KieServices ks = KieServices.Factory.get();
         BasicConfigurator.configure();
         Logger.getLogger(Main.class).setLevel(Level.OFF);
@@ -25,10 +47,24 @@ public class Controller {
         session.fireAllRules();
     }
 
-    @FXML
-    private void buttonClick() {
-        session.insert(new Fact("Personal use"));
-        session.fireAllRules();
+    public void getNewQuestion(Question question) {
+        currentQuestion = question;
+        label.setText(question.getText());
+
+        pane.getChildren().removeAll(buttons);
+        buttons.clear();
+
+        for (int i = 0; i < question.getPossibleAnswers().size(); i++) {    //jakoś ładniej musi być
+            String possibleAnswer = question.getPossibleAnswers().get(i);
+            JFXButton button = new JFXButton(possibleAnswer);
+            button.setOnAction(action -> {
+                session.insert(new Answer(possibleAnswer));
+                session.fireAllRules();
+            });
+            buttons.add(button);
+            pane.add(button, 1, i*2 + 4, 8, 3);
+        }
+
     }
 
 }
