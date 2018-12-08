@@ -15,7 +15,7 @@ end
 
 rule "Personal use"
     when
-        a: Answer(text == "Personal use")       //to nie przejdzie
+        a: Answer(text == "Personal use", questionText == "Who is it for?")
     then
         Question question = new Question("Are you at home?");
         question.getPossibleAnswers().add("Yes");
@@ -26,7 +26,7 @@ end
 
 rule "Someone else"
     when
-        a: Answer(text == "Someone else")
+        a: Answer(text == "Someone else", questionText == "Who is it for?")
     then
         Question question = new Question("Are you at social gathering?");
         question.getPossibleAnswers().add("Yes");
@@ -35,10 +35,19 @@ rule "Someone else"
 end
 
 
+rule "At a social gathering"
+    when
+        a: Answer(text == "Yes", questionText == "Are you at a social gathering?")
+    then
+        Question question = new Question("What kind gathering?");
+        controller.getNewQuestion(question);
+end
+
+
 rule "At home"
     when
-        a: Answer(text == "Yes")
+        a: Answer(text == "No", questionText == "Are you at a social gathering?")
     then
-        Question question = new Question("dupa");
+        Question question = new Question("?");
         controller.getNewQuestion(question);
 end

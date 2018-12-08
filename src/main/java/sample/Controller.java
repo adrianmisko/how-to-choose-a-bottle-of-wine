@@ -53,14 +53,14 @@ public class Controller implements Initializable {
         pane.getChildren().removeAll(buttons);
         buttons.clear();
 
-        for (int i = 0; i < question.getPossibleAnswers().size(); i++) {    //jakoś ładniej musi być
+        for (int i = 0; i < question.getPossibleAnswers().size(); i++) {
             String possibleAnswer = question.getPossibleAnswers().get(i);
             JFXButton button = new JFXButton(possibleAnswer);
             button.setMaxWidth(Double.MAX_VALUE);
             button.setMaxHeight(Double.MAX_VALUE);
             button.getStyleClass().add("button-raised");
             button.setOnAction(action -> {
-                session.insert(new Answer(possibleAnswer));
+                session.insert(new Answer(possibleAnswer, question.getText()));
                 session.fireAllRules();
             });
             buttons.add(button);

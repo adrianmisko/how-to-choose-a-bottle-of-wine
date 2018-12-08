@@ -10,8 +10,13 @@ public class Answer {
     @Setter
     private String text;
 
-    public Answer(String text) {
+    @Getter
+    @Setter
+    private String questionText;
+
+    public Answer(String text, String questionText) {
         this.text = text;
+        this.questionText = questionText;
     }
 
 }
