@@ -14,17 +14,6 @@ rule "Who is it for?"
 end
 
 
-rule "It's for personal use"
-    when
-        a: Answer(text == "Personal use", questionText == "Who is it for?")
-    then
-        Question question = new Question("Are you at home?");
-        question.getPossibleAnswers().add("Yes");
-        question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
-end
-
-
 rule "It's for someone else"
     when
         a: Answer(text == "Someone else", questionText == "Who is it for?")
@@ -74,15 +63,6 @@ rule "They're wine lovers"
 end
 
 
-rule "They aren't wine lovers"
-    when
-        a: Answer(text == "No", questionText == "Are they wine lovers?")
-    then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
-        controller.getFinishResult(result);
-end
-
-
 rule "I really know them"
     when
         a: Answer(text == "Yes", questionText == "Do you really know them?") or
@@ -96,29 +76,13 @@ rule "I really know them"
 end
 
 
-rule "I not really know them"
-    when
-        a: Answer(text == "No", questionText == "Do you really know them?")
-    then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
-        controller.getFinishResult(result);
-end
-
-
 rule "They are my favourite people in the world"
     when
-        a: Answer(text == "Yes", questionText == "Are they your favourite people in the world? Be honest.")
+        a: Answer(text == "Yes", questionText == "Are they your favourite people in the world? Be honest.") or
+        a1: Answer(text == "1st", questionText == "Which anniversary?") or
+        a2: Answer(text == "Old", questionText == "Somebody who's old person or young?")
     then
         FinshResult result =  new FinshResult("Hedonistic joy ride CALIFORNIA PINOT NOIR");
-        controller.getFinishResult(result);
-end
-
-
-rule "They aren't my favourite people in the world"
-    when
-        a: Answer(text == "No", questionText == "Are they your favourite people in the world? Be honest.")
-    then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
         controller.getFinishResult(result);
 end
 
@@ -161,9 +125,12 @@ rule "They are cooking"
 end
 
 
-rule "I am cooking"
+rule "I am cooking or They aren't wine lovers or I not really know them or They aren't my favourite people in the world"
     when
-        a: Answer(text == "Me", questionText == "Who is cooking?")
+        a: Answer(text == "Me", questionText == "Who is cooking?") or
+        a1: Answer(text == "No", questionText == "Are they wine lovers?") or
+        a2: Answer(text == "No", questionText == "Do you really know them?") or
+        a3: Answer(text == "No", questionText == "Are they your favourite people in the world? Be honest.")
     then
         FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
         controller.getFinishResult(result);
@@ -209,3 +176,413 @@ rule "I don't know them"
         controller.getFinishResult(result);
 end
 
+
+rule "It's for personal use"
+    when
+        a: Answer(text == "Personal use", questionText == "Who is it for?")
+    then
+        Question question = new Question("Are you at home?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am not at home"
+    when
+        a: Answer(text == "No", questionText == "Are you at home?")
+    then
+        Question question = new Question("What occasion is it?");
+        question.getPossibleAnswers().add("Drinking in public");
+        question.getPossibleAnswers().add("Camping");
+        question.getPossibleAnswers().add("Dinner");
+        question.getPossibleAnswers().add("Restaurant");
+        question.getPossibleAnswers().add("Special occasions");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's drinking in public or camping"
+    when
+        a: Answer(text == "Drinking in public" || text == "Camping", questionText == "What occasion is it?")
+    then
+        FinshResult result =  new FinshResult("No cork screw reo SINGLE SERVE BOX WINE");
+        controller.getFinishResult(result);
+end
+
+
+rule "It's dinner"
+    when
+        a: Answer(text == "Dinner", questionText == "What occasion is it?") or
+        a1: Answer(text == "No", questionText == "Are you alone at home?")
+    then
+        Question question = new Question("Is wine the main course?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "Wine is the main course"
+    when
+        a: Answer(text == "Yes", questionText == "Is wine the main course?") or
+        a1: Answer(text == "OUI.", questionText == "Are you going to feeling fancy?") or
+        a2: Answer(text == "Yes", questionText == "Are you alone at New Years Eve?")
+    then
+        FinshResult result =  new FinshResult("Go for something exotic SANGIOVESE or GRENACHE");
+        controller.getFinishResult(result);
+end
+
+
+rule "Wine is not the main course"
+    when
+        a: Answer(text == "No", questionText == "Is wine the main course?")
+    then
+        Question question = new Question("Is it dinner from a microwave?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's dinner from a microwave"
+    when
+        a: Answer(text == "Yes", questionText == "Is it dinner from a microwave?") or
+        a1: Answer(text == "Yes", questionText == "Is it order from a window?")
+    then
+        FinshResult result =  new FinshResult("Go budget. Go bulk. 3 LITER BOX WINE");
+        controller.getFinishResult(result);
+end
+
+
+rule "It's not dinner from a microwave"
+    when
+        a: Answer(text == "No", questionText == "Is it dinner from a microwave?")
+    then
+        Question question = new Question("Are you cooking /W your wine?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am cooking my wine"
+    when
+        a: Answer(text == "Yes", questionText == "Are you cooking /W your wine?")
+    then
+        FinshResult result =  new FinshResult("Wine &<$9 such as SAUVIGNON BLANC");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am not cooking my wine"
+    when
+        a: Answer(text == "No", questionText == "Are you cooking /W your wine?") or
+        a1: Answer(text == "Yes", questionText == "Are you daily drinking wine?")
+    then
+        Question question = new Question("Are you kool-aid man?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am kool-aid man"
+    when
+        a: Answer(text == "Yes", questionText == "Are you kool-aid man?")
+    then
+        FinshResult result =  new FinshResult("Fruit forward wine ARGENTINIAN MALBEC");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am not kool-aid man"
+    when
+        a: Answer(text == "No", questionText == "Are you kool-aid man?")
+    then
+        Question question = new Question("Did you use to eat dirt as a child?");
+        question.getPossibleAnswers().add("Yum");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I used to eat dirt as a child"
+    when
+        a: Answer(text == "Yum", questionText == "Did you use to eat dirt as a child?")
+    then
+        FinshResult result =  new FinshResult("Something earthy CHINON or BOURGUEIL");
+        controller.getFinishResult(result);
+end
+
+
+rule "I didn't use to eat dirt as a child"
+    when
+        a: Answer(text == "No", questionText == "Did you use to eat dirt as a child?")
+    then
+        Question question = new Question("Did you have the spray butter in your mouth?");
+        question.getPossibleAnswers().add("Yep");
+        question.getPossibleAnswers().add("No!");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I had the spray butter in my mouth"
+    when
+        a: Answer(text == "Yep", questionText == "Did you have the spray butter in your mouth?")
+    then
+        FinshResult result =  new FinshResult("Please bring me my BUTTERY CHARDONNAY");
+        controller.getFinishResult(result);
+end
+
+
+rule "I didn't have the spray butter in my mouth"
+    when
+        a: Answer(text == "No!", questionText == "Did you have the spray butter in your mouth?") or
+        a1: Answer(text == "What?", questionText == "Is your wine collection new or old world?")
+    then
+        FinshResult result =  new FinshResult("Thx for playin' now get out of my flowchart");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am at home"
+    when
+        a: Answer(text == "Yes", questionText == "Are you at home?")
+    then
+        Question question = new Question("Are you alone at home?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am alone at home"
+    when
+        a: Answer(text == "Yes", questionText == "Are you alone at home?")
+    then
+        Question question = new Question("Are you recovering from work?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am recovering from work"
+    when
+        a: Answer(text == "Yes", questionText == "Are you recovering from work?")
+    then
+        FinshResult result =  new FinshResult("Sniff your class of PINOT NOIR");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am not recovering from work"
+    when
+        a: Answer(text == "No", questionText == "Are you recovering from work?")
+    then
+        Question question = new Question("Are you going to getting drunk?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am going to geting drunk"
+    when
+        a: Answer(text == "Yes", questionText == "Are you going to getting drunk?")
+    then
+        FinshResult result =  new FinshResult("Go for high octane ZINFANDEL or SHIRAZ");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am not going to geting drunk"
+    when
+        a: Answer(text == "No", questionText == "Are you going to getting drunk?")
+    then
+        Question question = new Question("Are you going to feeling fancy?");
+        question.getPossibleAnswers().add("OUI.");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am not going to feeling fancy"
+    when
+        a: Answer(text == "No", questionText == "Are you going to feeling fancy?")
+    then
+        Question question = new Question("Are you daily drinking wine?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am not daily drinking wine"
+    when
+        a: Answer(text == "No", questionText == "Are you daily drinking wine?") or
+        a1: Answer(text == "Yes", questionText == "Can you pronounce the menu?")
+    then
+        Question question = new Question("Is your wine collection new or old world?");
+        question.getPossibleAnswers().add("Old!");
+        question.getPossibleAnswers().add("New");
+        question.getPossibleAnswers().add("What?");
+        controller.getNewQuestion(question);
+end
+
+
+rule "My collection is old"
+    when
+        a: Answer(text == "Old!", questionText == "Is your wine collection new or old world?")
+    then
+        FinshResult result =  new FinshResult("Why but anything but BORDEAUX or BURGUNDY");
+        controller.getFinishResult(result);
+end
+
+
+rule "My collection is new"
+    when
+        a: Answer(text == "New", questionText == "Is your wine collection new or old world?")
+    then
+        Question question = new Question("Are you into cults?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I am into cults"
+    when
+        a: Answer(text == "Yes", questionText == "Are you into cults?")
+    then
+        FinshResult result =  new FinshResult("Cult classic SINE QUA NON or CAYUSE");
+        controller.getFinishResult(result);
+end
+
+
+rule "I am not into cults"
+    when
+        a: Answer(text == "No", questionText == "Are you into cults?") or
+        a1: Answer(text == "No", questionText == "Is it order from a window?")
+    then
+        FinshResult result =  new FinshResult("Drink a bottle of sun CALIFORNIA CABERNET");
+        controller.getFinishResult(result);
+end
+
+
+rule "It's restaurant"
+    when
+        a: Answer(text == "Restaurant", questionText == "What occasion is it?")
+    then
+        Question question = new Question("Is it a fancy restaurant?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+rule "It's not a fancy restaurant"
+    when
+        a: Answer(text == "No", questionText == "Is it a fancy restaurant?")
+    then
+        Question question = new Question("Is it order from a window?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's a fancy restaurant"
+    when
+        a: Answer(text == "Yes", questionText == "Is it a fancy restaurant?")
+    then
+        Question question = new Question("Can you pronounce the menu?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "I can't pronounce the menu"
+    when
+        a1: Answer(text == "No", questionText == "Can you pronounce the menu?")
+    then
+        FinshResult result =  new FinshResult("Ask for COTES DU RHONE");
+        controller.getFinishResult(result);
+end
+
+
+rule "It's a special occasion"
+    when
+        a: Answer(text == "Special occasions", questionText == "What occasion is it?")
+    then
+        Question question = new Question("What special occasion is it?");
+        question.getPossibleAnswers().add("Anniversary");
+        question.getPossibleAnswers().add("Eloping");
+        question.getPossibleAnswers().add("Birthday");
+        question.getPossibleAnswers().add("Blind date");
+        question.getPossibleAnswers().add("New Years Eve");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's anniversary"
+    when
+        a: Answer(text == "Anniversary", questionText == "What special occasion is it?")
+    then
+        Question question = new Question("Which anniversary?");
+        question.getPossibleAnswers().add("1st");
+        question.getPossibleAnswers().add("2+");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's 2+ anniversary"
+    when
+        a: Answer(text == "2+", questionText == "Which anniversary?")
+    then
+        FinshResult result =  new FinshResult("Complacency is a bitch MERLOT");
+        controller.getFinishResult(result);
+end
+
+
+rule "It's birthday"
+    when
+        a: Answer(text == "Birthday", questionText == "What special occasion is it?")
+    then
+        Question question = new Question("Somebody who's old person or young?");
+        question.getPossibleAnswers().add("Old");
+        question.getPossibleAnswers().add("Young");
+        controller.getNewQuestion(question);
+end
+
+
+rule "It's birthday of young person"
+    when
+        a: Answer(text == "Young", questionText == "Somebody who's old person or young?") or
+        a1: Answer(text == "Eloping", questionText == "What special occasion is it?") or
+        a2: Answer(text == "Blind date", questionText == "What special occasion is it?")
+    then
+        FinshResult result =  new FinshResult("Something sweet RIESLING or CHENIN BLANC");
+        controller.getFinishResult(result);
+end
+
+
+rule "Is's New Years Eve"
+    when
+        a: Answer(text == "New Years Eve", questionText == "What special occasion is it?")
+    then
+        Question question = new Question("Are you alone at New Years Eve?");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "Is's New Years Eve not alone"
+    when
+        a: Answer(text == "No", questionText == "Are you alone at New Years Eve?")
+    then
+        FinshResult result =  new FinshResult("Cheap bubbly SPANISH CAVA");
+        controller.getFinishResult(result);
+end
