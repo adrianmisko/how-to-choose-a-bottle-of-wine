@@ -17,7 +17,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
-  <Label fx:id="label" alignment="CENTER" prefHeight="189.0" prefWidth="645.0" text="Question" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+  <Label fx:id="label" alignment="CENTER" prefHeight="189.0" prefWidth="645.0" text="Question" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <font>
          <Font name="Verdana" size="24.0" />
       </font></Label>
