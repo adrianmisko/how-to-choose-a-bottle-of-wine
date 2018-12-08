@@ -3,7 +3,7 @@ import java.sql.SQLOutput
 
 global Controller controller;
 
-rule "Who"
+rule "Who is it for?"
     when
 
     then
@@ -14,7 +14,7 @@ rule "Who"
 end
 
 
-rule "Personal use"
+rule "It's for personal use"
     when
         a: Answer(text == "Personal use", questionText == "Who is it for?")
     then
@@ -25,7 +25,7 @@ rule "Personal use"
 end
 
 
-rule "Someone else"
+rule "It's for someone else"
     when
         a: Answer(text == "Someone else", questionText == "Who is it for?")
     then
@@ -36,7 +36,7 @@ rule "Someone else"
 end
 
 
-rule "At a social gathering yes"
+rule "I'm at a social gathering"
     when
         a: Answer(text == "Yes", questionText == "Are you at a social gathering?")
     then
@@ -50,20 +50,22 @@ rule "At a social gathering yes"
 end
 
 
-rule "At a social gathering no"
+rule "I'm not at a social gathering"
     when
-        a: Answer(text == "No", questionText == "Are you at a social gathering?")
+         a1: Answer(text == "Yes", questionText == "Do you know them?") or
+         a2: Answer(text == "No", questionText == "Are you at a social gathering?")
     then
-        Question question = new Question("Are they a wine lower");
+        Question question = new Question("Are they wine lovers?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
         controller.getNewQuestion(question);
 end
 
 
-rule "Wine lower yes"
+rule "They're wine lovers"
     when
-        a: Answer(text == "Yes", questionText == "Are they a wine lower?")
+        a: Answer(text == "Yes", questionText == "Are they wine lovers?")
+        a2: Answer(text == "No", questionText == "Are you at a social gathering?")
     then
         Question question = new Question("Do you really know them?");
         question.getPossibleAnswers().add("Yes");
@@ -72,18 +74,20 @@ rule "Wine lower yes"
 end
 
 
-rule "Wine lower no"
+rule "They aren't wine lovers"
     when
-        a: Answer(text == "No", questionText == "Are they a wine lower?")
+        a: Answer(text == "No", questionText == "Are they wine lovers?")
     then
         FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
         controller.getFinishResult(result);
 end
 
 
-rule "Really know them yes"
+rule "I really know them"
     when
-        a: Answer(text == "Yes", questionText == "Do you really know them?")
+        a: Answer(text == "Yes", questionText == "Do you really know them?") or
+        (a1: Answer(text == "Yes", questionText == "Are they wine lovers?") and
+        a2: Answer(text == "Yes", questionText == "Do you know them?"))
     then
         Question question = new Question("Are they your favourite people in the world? Be honest.");
         question.getPossibleAnswers().add("Yes");
@@ -92,7 +96,7 @@ rule "Really know them yes"
 end
 
 
-rule "Really know them no"
+rule "I not really know them"
     when
         a: Answer(text == "No", questionText == "Do you really know them?")
     then
@@ -101,7 +105,7 @@ rule "Really know them no"
 end
 
 
-rule "Favourite people in the world yes"
+rule "They are my favourite people in the world"
     when
         a: Answer(text == "Yes", questionText == "Are they your favourite people in the world? Be honest.")
     then
@@ -110,7 +114,7 @@ rule "Favourite people in the world yes"
 end
 
 
-rule "Favourite people in the world no"
+rule "They aren't my favourite people in the world"
     when
         a: Answer(text == "No", questionText == "Are they your favourite people in the world? Be honest.")
     then
@@ -119,7 +123,7 @@ rule "Favourite people in the world no"
 end
 
 
-rule "Art opening"
+rule "It is art opening"
     when
         a: Answer(text == "Art opening", questionText == "What kind of gathering?")
     then
@@ -128,7 +132,7 @@ rule "Art opening"
 end
 
 
-rule "Beach BBQ"
+rule "It's beach BBQ"
     when
         a: Answer(text == "Beach BBQ", questionText == "What kind of gathering?")
     then
@@ -137,7 +141,7 @@ rule "Beach BBQ"
 end
 
 
-rule "Dinner party"
+rule "It's a dinner party"
     when
         a: Answer(text == "Dinner party", questionText == "What kind of gathering?")
     then
@@ -148,7 +152,7 @@ rule "Dinner party"
 end
 
 
-rule "Them cooking"
+rule "They are cooking"
     when
         a: Answer(text == "Them", questionText == "Who is cooking?")
     then
@@ -157,7 +161,7 @@ rule "Them cooking"
 end
 
 
-rule "Me cooking"
+rule "I am cooking"
     when
         a: Answer(text == "Me", questionText == "Who is cooking?")
     then
@@ -166,7 +170,7 @@ rule "Me cooking"
 end
 
 
-rule "Bachelor(ette) party"
+rule "It's bachelor(ette) party"
     when
         a: Answer(text == "Bachelor(ette) party", questionText == "What kind of gathering?")
     then
@@ -175,7 +179,7 @@ rule "Bachelor(ette) party"
 end
 
 
-rule "Get together"
+rule "It's get together"
     when
         a: Answer(text == "Get together", questionText == "What kind of gathering?")
     then
@@ -186,7 +190,7 @@ rule "Get together"
 end
 
 
-rule "Know them yes"
+rule "I know them"
     when
         a: Answer(text == "Yes", questionText == "Do you know them?")
     then
@@ -197,7 +201,7 @@ rule "Know them yes"
 end
 
 
-rule "Know them no"
+rule "I don't know them"
     when
         a: Answer(text == "No", questionText == "Do you know them?")
     then
@@ -205,21 +209,3 @@ rule "Know them no"
         controller.getFinishResult(result);
 end
 
-
-rule "Wine lovers yes"
-    when
-        a: Answer(text == "Yes", questionText == "Are they wine lovers?")
-    then
-        Question question = new Question("Are they your favourite people in the world? Be honest.");
-        question.getPossibleAnswers().add("Yes");
-        question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
-end
-
-rule "Wine lovers no"
-    when
-        a: Answer(text == "No", questionText == "Are they wine lovers?")
-    then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
-        controller.getFinishResult(result);
-end
