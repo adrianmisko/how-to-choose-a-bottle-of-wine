@@ -79,4 +79,12 @@ public class Controller implements Initializable {
 
     }
 
+    public void getFinishResult(FinshResult result) {
+
+        label.setText(result.getText());
+        pane.getChildren().removeAll(buttons);
+        buttons.clear();
+
+    }
+
 }
