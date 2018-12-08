@@ -6,10 +6,12 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.TextAlignment;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -82,6 +84,8 @@ public class Controller implements Initializable {
     public void getFinishResult(FinshResult result) {
 
         label.setText(result.getText());
+        pane.setPadding(new Insets(5, 0, 0, 0));
+        label.setContentDisplay(ContentDisplay.TOP);
         pane.getChildren().removeAll(buttons);
         buttons.clear();
 
