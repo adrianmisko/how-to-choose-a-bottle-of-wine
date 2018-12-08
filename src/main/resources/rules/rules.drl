@@ -28,18 +28,22 @@ rule "Someone else"
     when
         a: Answer(text == "Someone else", questionText == "Who is it for?")
     then
-        Question question = new Question("Are you at social gathering?");
+        Question question = new Question("Are you at a social gathering?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
         controller.getNewQuestion(question);
 end
 
 
-rule "At a social gathering"
+rule "At a social gathering yes"
     when
         a: Answer(text == "Yes", questionText == "Are you at a social gathering?")
     then
-        Question question = new Question("What kind gathering?");
+        Question question = new Question("What kind of gathering?");
+        question.getPossibleAnswers().add("Dinner party");
+        question.getPossibleAnswers().add("Art opening");
+        question.getPossibleAnswers().add("Get together");
+        question.getPossibleAnswers().add("Bachelor (ette) party");
         controller.getNewQuestion(question);
 end
 
@@ -48,6 +52,6 @@ rule "At home"
     when
         a: Answer(text == "No", questionText == "Are you at a social gathering?")
     then
-        Question question = new Question("?");
+        Question question = new Question("Is it a gift?");
         controller.getNewQuestion(question);
 end
