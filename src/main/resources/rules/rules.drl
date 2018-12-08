@@ -18,8 +18,8 @@ rule "Personal use"
         a: Answer(text == "Personal use")       //to nie przejdzie
     then
         Question question = new Question("Are you at home?");
-          question.getPossibleAnswers().add("Yes");
-                question.getPossibleAnswers().add("No");
+        question.getPossibleAnswers().add("Yes");
+        question.getPossibleAnswers().add("No");
         controller.getNewQuestion(question);
 end
 
@@ -31,5 +31,14 @@ rule "Someone else"
         Question question = new Question("Are you at social gathering?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
+        controller.getNewQuestion(question);
+end
+
+
+rule "At home"
+    when
+        a: Answer(text == "Yes")
+    then
+        Question question = new Question("dupa");
         controller.getNewQuestion(question);
 end
