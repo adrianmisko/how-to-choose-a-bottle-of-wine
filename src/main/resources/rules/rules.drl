@@ -3,12 +3,12 @@ import java.sql.SQLOutput
 
 global Controller controller;
 
-rule "Who is it for?"
+rule "Who's drinking it?"
     when
 
     then
-        Question question = new Question("Who is it for?");
-        question.getPossibleAnswers().add("Personal use");
+        Question question = new Question("Who's drinking it?");
+        question.getPossibleAnswers().add("It's for personal use");
         question.getPossibleAnswers().add("Someone else");
         controller.getNewQuestion(question);
 end
@@ -16,7 +16,7 @@ end
 
 rule "It's for someone else"
     when
-        a: Answer(text == "Someone else", questionText == "Who is it for?")
+        a: Answer(text == "Someone else", questionText == "Who's drinking it?")
     then
         Question question = new Question("Are you at a social gathering?");
         question.getPossibleAnswers().add("Yes");
@@ -179,7 +179,7 @@ end
 
 rule "It's for personal use"
     when
-        a: Answer(text == "Personal use", questionText == "Who is it for?")
+        a: Answer(text == "It's for personal use", questionText == "Who's drinking it?")
     then
         Question question = new Question("Are you at home?");
         question.getPossibleAnswers().add("Yes");

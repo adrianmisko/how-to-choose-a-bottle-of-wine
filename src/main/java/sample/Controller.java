@@ -41,7 +41,6 @@ public class Controller implements Initializable {
         buttons = new ArrayList<>();
         label.setMaxWidth(Double.MAX_VALUE);
         pane.setPadding(new Insets(45, 45, 45, 45));
-        pane.setVgap(45.0);
 
         KieServices ks = KieServices.Factory.get();
         BasicConfigurator.configure();
@@ -56,6 +55,7 @@ public class Controller implements Initializable {
         label.setText(question.getText());
         pane.getChildren().removeAll(buttons);
         pane.getRowConstraints().subList(3, pane.getRowConstraints().size()).clear();
+        pane.setVgap(45.0);
         buttons.clear();
         int numOfAnswers = question.getPossibleAnswers().size();
         for (int i = 0; i < numOfAnswers; i++) {
@@ -70,6 +70,7 @@ public class Controller implements Initializable {
             });
             buttons.add(button);
             if (i >= 2) {
+                pane.setVgap(22.5);
                 RowConstraints rc = new RowConstraints();
                 rc.setVgrow(Priority.SOMETIMES);
                 rc.setMinHeight(10.0);
