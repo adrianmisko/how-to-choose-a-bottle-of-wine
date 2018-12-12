@@ -6,11 +6,14 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -31,6 +34,7 @@ public class Controller implements Initializable {
     @FXML
     private Label label;
     private List<JFXButton> buttons;
+
 
     private KieSession session;
 
@@ -90,6 +94,19 @@ public class Controller implements Initializable {
         pane.getChildren().removeAll(buttons);
         buttons.clear();
 
+
+        if (result.getImg() != null) {
+            ImageView img = new ImageView(result.getImg());
+            img.setFitHeight(label.getHeight() * 2 + label.getLayoutY());
+            img.setPreserveRatio(true);
+            pane.add(new StackPane(), 0, 1, 1, 2);
+            StackPane sp = (StackPane)pane.getChildren().get(1);
+            sp.getChildren().add(img);
+            sp.setAlignment(img, Pos.CENTER);
+
+        }
+
     }
+
 
 }

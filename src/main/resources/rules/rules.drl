@@ -82,7 +82,7 @@ rule "They are my favourite people in the world"
         Answer(text == "1st", questionText == "Which anniversary?") or
         Answer(text == "Old", questionText == "Somebody who's old person or young?")
     then
-        FinshResult result =  new FinshResult("Hedonistic joy ride CALIFORNIA PINOT NOIR");
+        FinshResult result =  new FinshResult("Hedonistic joy ride CALIFORNIA PINOT NOIR", "California Pinot Noir.png");
         controller.getFinishResult(result);
 end
 
@@ -91,7 +91,7 @@ rule "It is art opening"
     when
         Answer(text == "Art opening", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("They rarely have a sense of taste 2-BUCK CHUCK");
+        FinshResult result =  new FinshResult("They rarely have a sense of taste 2-BUCK CHUCK", "2_buck_chuck.jpg");
         controller.getFinishResult(result);
 end
 
@@ -100,7 +100,7 @@ rule "It's beach BBQ"
     when
         Answer(text == "Beach BBQ", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("Bought a nice bottle but it was confiscated. No glass on the beach");
+        FinshResult result =  new FinshResult("Bought a nice bottle but it was confiscated. No glass on the beach", "no_glass.jpg");
         controller.getFinishResult(result);
 end
 
@@ -120,7 +120,7 @@ rule "They are cooking"
     when
         Answer(text == "Them", questionText == "Who is cooking?")
     then
-        FinshResult result =  new FinshResult("Buy the biggest bottle WITH THE WORDS 'RED BLEND'");
+        FinshResult result =  new FinshResult("Buy the biggest bottle WITH THE WORDS 'RED BLEND'", "red_blend.jpg");
         controller.getFinishResult(result);
 end
 
@@ -132,7 +132,7 @@ rule "I am cooking or They aren't wine lovers or I not really know them or They 
         Answer(text == "No", questionText == "Do you really know them?") or
         Answer(text == "No", questionText == "Are they your favourite people in the world? Be honest.")
     then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart");
+        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart", "go_away.png");
         controller.getFinishResult(result);
 end
 
@@ -141,7 +141,7 @@ rule "It's bachelor(ette) party"
     when
         Answer(text == "Bachelor(ette) party", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("Leave your wine at home BRING WHISKEY OR VODKA");
+        FinshResult result =  new FinshResult("Leave your wine at home BRING WHISKEY OR VODKA", "Whiskey-or-Vodka.jpg");
         controller.getFinishResult(result);
 end
 
@@ -172,7 +172,7 @@ rule "I don't know them"
     when
         Answer(text == "No", questionText == "Do you know them?")
     then
-        FinshResult result =  new FinshResult("Bring a boring bottle & HOPE NO ONE OPENS IT");
+        FinshResult result =  new FinshResult("Bring a boring bottle & HOPE NO ONE OPENS IT", "boring.jpg");
         controller.getFinishResult(result);
 end
 
@@ -206,7 +206,7 @@ rule "It's drinking in public or camping"
     when
         Answer(text == "Drinking in public" || text == "Camping", questionText == "What occasion is it?")
     then
-        FinshResult result =  new FinshResult("No cork screw reo SINGLE SERVE BOX WINE");
+        FinshResult result =  new FinshResult("No cork screw reo SINGLE SERVE BOX WINE", "singleserve.jpg");
         controller.getFinishResult(result);
 end
 
@@ -229,7 +229,7 @@ rule "Wine is the main course"
         Answer(text == "OUI.", questionText == "Are you going to feeling fancy?") or
         Answer(text == "Yes", questionText == "Are you alone at New Years Eve?")
     then
-        FinshResult result =  new FinshResult("Go for something exotic SANGIOVESE or GRENACHE");
+        FinshResult result =  new FinshResult("Go for something exotic SANGIOVESE or GRENACHE", "grenache-vs-sangiovese.jpg");
         controller.getFinishResult(result);
 end
 
@@ -250,7 +250,7 @@ rule "It's dinner from a microwave"
         Answer(text == "Yes", questionText == "Is it dinner from a microwave?") or
         Answer(text == "Yes", questionText == "Is it order from a window?")
     then
-        FinshResult result =  new FinshResult("Go budget. Go bulk. 3 LITER BOX WINE");
+        FinshResult result =  new FinshResult("Go budget. Go bulk. 3 LITER BOX WINE", "3-liters.jpg");
         controller.getFinishResult(result);
 end
 
@@ -270,7 +270,7 @@ rule "I am cooking my wine"
     when
         Answer(text == "Yes", questionText == "Are you cooking /W your wine?")
     then
-        FinshResult result =  new FinshResult("Wine &<$9 such as SAUVIGNON BLANC");
+        FinshResult result =  new FinshResult("Wine &<$9 such as SAUVIGNON BLANC", "SauvBlanc_WEB.jpg");
         controller.getFinishResult(result);
 end
 
@@ -291,7 +291,7 @@ rule "I am kool-aid man"
     when
         Answer(text == "Yes", questionText == "Are you kool-aid man?")
     then
-        FinshResult result =  new FinshResult("Fruit forward wine ARGENTINIAN MALBEC");
+        FinshResult result =  new FinshResult("Fruit forward wine ARGENTINIAN MALBEC", "Argentinian-Malbec.jpg");
         controller.getFinishResult(result);
 end
 
@@ -311,7 +311,7 @@ rule "I used to eat dirt as a child"
     when
         Answer(text == "Yum", questionText == "Did you use to eat dirt as a child?")
     then
-        FinshResult result =  new FinshResult("Something earthy CHINON or BOURGUEIL");
+        FinshResult result =  new FinshResult("Something earthy CHINON or BOURGUEIL", "bourgueil-vs-chinon.jpg");
         controller.getFinishResult(result);
 end
 
@@ -331,7 +331,7 @@ rule "I had the spray butter in my mouth"
     when
         Answer(text == "Yep", questionText == "Did you have the spray butter in your mouth?")
     then
-        FinshResult result =  new FinshResult("Please bring me my BUTTERY CHARDONNAY");
+        FinshResult result =  new FinshResult("Please bring me my BUTTERY CHARDONNAY", "chardonney.png");
         controller.getFinishResult(result);
 end
 
@@ -341,7 +341,7 @@ rule "I didn't have the spray butter in my mouth"
         Answer(text == "No!", questionText == "Did you have the spray butter in your mouth?") or
         Answer(text == "What?", questionText == "Is your wine collection new or old world?")
     then
-        FinshResult result =  new FinshResult("Thx for playin' now get out of my flowchart");
+        FinshResult result =  new FinshResult("Thx for playin' now get out of my flowchart", "go_away.png");
         controller.getFinishResult(result);
 end
 
@@ -372,7 +372,7 @@ rule "I am recovering from work"
     when
         Answer(text == "Yes", questionText == "Are you recovering from work?")
     then
-        FinshResult result =  new FinshResult("Sniff your class of PINOT NOIR");
+        FinshResult result =  new FinshResult("Sniff your class of PINOT NOIR", "Pinot-Noir.jpg");
         controller.getFinishResult(result);
 end
 
@@ -392,7 +392,7 @@ rule "I am going to geting drunk"
     when
         Answer(text == "Yes", questionText == "Are you going to getting drunk?")
     then
-        FinshResult result =  new FinshResult("Go for high octane ZINFANDEL or SHIRAZ");
+        FinshResult result =  new FinshResult("Go for high octane ZINFANDEL or SHIRAZ", "shiraz-vs-zinfandel.jpg");
         controller.getFinishResult(result);
 end
 
@@ -436,7 +436,7 @@ rule "My collection is old"
     when
         Answer(text == "Old!", questionText == "Is your wine collection new or old world?")
     then
-        FinshResult result =  new FinshResult("Why but anything but BORDEAUX or BURGUNDY");
+        FinshResult result =  new FinshResult("Why but anything but BORDEAUX or BURGUNDY", "bourgogne-vs-bordeaux.jpg");
         controller.getFinishResult(result);
 end
 
@@ -456,7 +456,7 @@ rule "I am into cults"
     when
         Answer(text == "Yes", questionText == "Are you into cults?")
     then
-        FinshResult result =  new FinshResult("Cult classic SINE QUA NON or CAYUSE");
+        FinshResult result =  new FinshResult("Cult classic SINE QUA NON or CAYUSE", "sine_qua_non-vs-cayuse.jpg");
         controller.getFinishResult(result);
 end
 
@@ -466,7 +466,7 @@ rule "I am not into cults"
         Answer(text == "No", questionText == "Are you into cults?") or
         Answer(text == "No", questionText == "Is it order from a window?")
     then
-        FinshResult result =  new FinshResult("Drink a bottle of sun CALIFORNIA CABERNET");
+        FinshResult result =  new FinshResult("Drink a bottle of sun CALIFORNIA CABERNET", "california_cabernet.jpg");
         controller.getFinishResult(result);
 end
 
@@ -507,7 +507,7 @@ rule "I can't pronounce the menu"
     when
         Answer(text == "No", questionText == "Can you pronounce the menu?")
     then
-        FinshResult result =  new FinshResult("Ask for COTES DU RHONE");
+        FinshResult result =  new FinshResult("Ask for COTES DU RHONE", "Cotes-du-Rhone.png");
         controller.getFinishResult(result);
 end
 
@@ -541,7 +541,7 @@ rule "It's 2+ anniversary"
     when
         Answer(text == "2+", questionText == "Which anniversary?")
     then
-        FinshResult result =  new FinshResult("Complacency is a bitch MERLOT");
+        FinshResult result =  new FinshResult("Complacency is a bitch MERLOT", "merlot-scheda.png");
         controller.getFinishResult(result);
 end
 
@@ -563,7 +563,7 @@ rule "It's birthday of young person"
         Answer(text == "Eloping", questionText == "What special occasion is it?") or
         Answer(text == "Blind date", questionText == "What special occasion is it?")
     then
-        FinshResult result =  new FinshResult("Something sweet RIESLING or CHENIN BLANC");
+        FinshResult result =  new FinshResult("Something sweet RIESLING or CHENIN BLANC", "cheninblanc-vs-riesling.jpg");
         controller.getFinishResult(result);
 end
 
@@ -583,6 +583,6 @@ rule "Is's New Years Eve not alone"
     when
         Answer(text == "No", questionText == "Are you alone at New Years Eve?")
     then
-        FinshResult result =  new FinshResult("Cheap bubbly SPANISH CAVA");
+        FinshResult result =  new FinshResult("Cheap bubbly SPANISH CAVA", "spanish_cava.jpg");
         controller.getFinishResult(result);
 end
