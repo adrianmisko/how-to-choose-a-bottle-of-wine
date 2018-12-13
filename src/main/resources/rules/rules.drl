@@ -1,5 +1,6 @@
 package sample;
 import java.sql.SQLOutput
+import sample.Result
 
 global Controller controller;
 
@@ -7,21 +8,21 @@ rule "Who is it for?"
     when
 
     then
-        Question question = new Question("Who is it for?");
+        Question question = new Question("Who is going to drink it?");
         question.getPossibleAnswers().add("Personal use");
         question.getPossibleAnswers().add("Someone else");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
 rule "It's for someone else"
     when
-        Answer(text == "Someone else", questionText == "Who is it for?")
+        Answer(text == "Someone else", questionText == "Who is going to drink it?")
     then
         Question question = new Question("Are you at a social gathering?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -35,7 +36,7 @@ rule "I'm at a social gathering"
         question.getPossibleAnswers().add("Dinner party");
         question.getPossibleAnswers().add("Bachelor(ette) party");
         question.getPossibleAnswers().add("Get together");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -47,7 +48,7 @@ rule "I'm not at a social gathering"
         Question question = new Question("Are they wine lovers?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -59,7 +60,7 @@ rule "They're wine lovers"
         Question question = new Question("Do you really know them?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -72,7 +73,7 @@ rule "I really know them"
         Question question = new Question("Are they your favourite people in the world? Be honest.");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -82,8 +83,8 @@ rule "They are my favourite people in the world"
         Answer(text == "1st", questionText == "Which anniversary?") or
         Answer(text == "Old", questionText == "Somebody who's old person or young?")
     then
-        FinshResult result =  new FinshResult("Hedonistic joy ride CALIFORNIA PINOT NOIR", "California Pinot Noir.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("Hedonistic joy ride CALIFORNIA PINOT NOIR", "California Pinot Noir.png");
+        controller.showResult(result);
 end
 
 
@@ -91,8 +92,8 @@ rule "It is art opening"
     when
         Answer(text == "Art opening", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("They rarely have a sense of taste 2-BUCK CHUCK", "2_buck_chuck.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("They rarely have a sense of taste 2-BUCK CHUCK", "2_buck_chuck.jpg");
+        controller.showResult(result);
 end
 
 
@@ -100,8 +101,8 @@ rule "It's beach BBQ"
     when
         Answer(text == "Beach BBQ", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("Bought a nice bottle but it was confiscated. No glass on the beach", "no_glass.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Bought a nice bottle but it was confiscated. No glass on the beach", "no_glass.jpg");
+        controller.showResult(result);
 end
 
 
@@ -112,7 +113,7 @@ rule "It's a dinner party"
         Question question = new Question("Who is cooking?");
         question.getPossibleAnswers().add("Them");
         question.getPossibleAnswers().add("Me");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -120,8 +121,8 @@ rule "They are cooking"
     when
         Answer(text == "Them", questionText == "Who is cooking?")
     then
-        FinshResult result =  new FinshResult("Buy the biggest bottle WITH THE WORDS 'RED BLEND'", "red_blend.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Buy the biggest bottle WITH THE WORDS 'RED BLEND'", "red_blend.jpg");
+        controller.showResult(result);
 end
 
 
@@ -132,8 +133,8 @@ rule "I am cooking or They aren't wine lovers or I not really know them or They 
         Answer(text == "No", questionText == "Do you really know them?") or
         Answer(text == "No", questionText == "Are they your favourite people in the world? Be honest.")
     then
-        FinshResult result =  new FinshResult("They don't deserve wine. Get out of my flowchart", "go_away.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("They don't deserve wine. Get out of my flowchart", "go_away.png");
+        controller.showResult(result);
 end
 
 
@@ -141,8 +142,8 @@ rule "It's bachelor(ette) party"
     when
         Answer(text == "Bachelor(ette) party", questionText == "What kind of gathering?")
     then
-        FinshResult result =  new FinshResult("Leave your wine at home BRING WHISKEY OR VODKA", "Whiskey-or-Vodka.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Leave your wine at home BRING WHISKEY OR VODKA", "Whiskey-or-Vodka.jpg");
+        controller.showResult(result);
 end
 
 
@@ -153,7 +154,7 @@ rule "It's get together"
         Question question = new Question("Do you know them?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -164,7 +165,7 @@ rule "I know them"
         Question question = new Question("Are they wine lovers?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -172,19 +173,19 @@ rule "I don't know them"
     when
         Answer(text == "No", questionText == "Do you know them?")
     then
-        FinshResult result =  new FinshResult("Bring a boring bottle & HOPE NO ONE OPENS IT", "boring.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Bring a boring bottle & HOPE NO ONE OPENS IT", "boring.jpg");
+        controller.showResult(result);
 end
 
 
 rule "It's for personal use"
     when
-        Answer(text == "Personal use", questionText == "Who is it for?")
+        Answer(text == "Personal use", questionText == "Who is going to drink it?")
     then
         Question question = new Question("Are you at home?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -198,7 +199,7 @@ rule "I am not at home"
         question.getPossibleAnswers().add("Dinner");
         question.getPossibleAnswers().add("Restaurant");
         question.getPossibleAnswers().add("Special occasions");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -206,8 +207,8 @@ rule "It's drinking in public or camping"
     when
         Answer(text == "Drinking in public" || text == "Camping", questionText == "What occasion is it?")
     then
-        FinshResult result =  new FinshResult("No cork screw reo SINGLE SERVE BOX WINE", "singleserve.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("No cork screw reo SINGLE SERVE BOX WINE", "singleserve.jpg");
+        controller.showResult(result);
 end
 
 
@@ -219,7 +220,7 @@ rule "It's dinner"
         Question question = new Question("Is wine the main course?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -229,8 +230,8 @@ rule "Wine is the main course"
         Answer(text == "OUI.", questionText == "Are you going to feeling fancy?") or
         Answer(text == "Yes", questionText == "Are you alone at New Years Eve?")
     then
-        FinshResult result =  new FinshResult("Go for something exotic SANGIOVESE or GRENACHE", "grenache-vs-sangiovese.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Go for something exotic SANGIOVESE or GRENACHE", "grenache-vs-sangiovese.jpg");
+        controller.showResult(result);
 end
 
 
@@ -241,7 +242,7 @@ rule "Wine is not the main course"
         Question question = new Question("Is it dinner from a microwave?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -250,8 +251,8 @@ rule "It's dinner from a microwave"
         Answer(text == "Yes", questionText == "Is it dinner from a microwave?") or
         Answer(text == "Yes", questionText == "Is it order from a window?")
     then
-        FinshResult result =  new FinshResult("Go budget. Go bulk. 3 LITER BOX WINE", "3-liters.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Go budget. Go bulk. 3 LITER BOX WINE", "3-liters.jpg");
+        controller.showResult(result);
 end
 
 
@@ -262,7 +263,7 @@ rule "It's not dinner from a microwave"
         Question question = new Question("Are you cooking /W your wine?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -270,8 +271,8 @@ rule "I am cooking my wine"
     when
         Answer(text == "Yes", questionText == "Are you cooking /W your wine?")
     then
-        FinshResult result =  new FinshResult("Wine &<$9 such as SAUVIGNON BLANC", "SauvBlanc_WEB.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Wine &<$9 such as SAUVIGNON BLANC", "SauvBlanc_WEB.jpg");
+        controller.showResult(result);
 end
 
 
@@ -283,7 +284,7 @@ rule "I am not cooking my wine"
         Question question = new Question("Are you kool-aid man?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -291,8 +292,8 @@ rule "I am kool-aid man"
     when
         Answer(text == "Yes", questionText == "Are you kool-aid man?")
     then
-        FinshResult result =  new FinshResult("Fruit forward wine ARGENTINIAN MALBEC", "Argentinian-Malbec.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Fruit forward wine ARGENTINIAN MALBEC", "Argentinian-Malbec.jpg");
+        controller.showResult(result);
 end
 
 
@@ -303,7 +304,7 @@ rule "I am not kool-aid man"
         Question question = new Question("Did you use to eat dirt as a child?");
         question.getPossibleAnswers().add("Yum");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -311,8 +312,8 @@ rule "I used to eat dirt as a child"
     when
         Answer(text == "Yum", questionText == "Did you use to eat dirt as a child?")
     then
-        FinshResult result =  new FinshResult("Something earthy CHINON or BOURGUEIL", "bourgueil-vs-chinon.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Something earthy CHINON or BOURGUEIL", "bourgueil-vs-chinon.jpg");
+        controller.showResult(result);
 end
 
 
@@ -323,7 +324,7 @@ rule "I didn't use to eat dirt as a child"
         Question question = new Question("Did you have the spray butter in your mouth?");
         question.getPossibleAnswers().add("Yep");
         question.getPossibleAnswers().add("No!");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -331,8 +332,8 @@ rule "I had the spray butter in my mouth"
     when
         Answer(text == "Yep", questionText == "Did you have the spray butter in your mouth?")
     then
-        FinshResult result =  new FinshResult("Please bring me my BUTTERY CHARDONNAY", "chardonney.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("Please bring me my BUTTERY CHARDONNAY", "chardonney.png");
+        controller.showResult(result);
 end
 
 
@@ -341,8 +342,8 @@ rule "I didn't have the spray butter in my mouth"
         Answer(text == "No!", questionText == "Did you have the spray butter in your mouth?") or
         Answer(text == "What?", questionText == "Is your wine collection new or old world?")
     then
-        FinshResult result =  new FinshResult("Thx for playin' now get out of my flowchart", "go_away.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("Thx for playin' now get out of my flowchart", "go_away.png");
+        controller.showResult(result);
 end
 
 
@@ -353,7 +354,7 @@ rule "I am at home"
         Question question = new Question("Are you alone at home?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -364,7 +365,7 @@ rule "I am alone at home"
         Question question = new Question("Are you recovering from work?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -372,8 +373,8 @@ rule "I am recovering from work"
     when
         Answer(text == "Yes", questionText == "Are you recovering from work?")
     then
-        FinshResult result =  new FinshResult("Sniff your class of PINOT NOIR", "Pinot-Noir.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Sniff your class of PINOT NOIR", "Pinot-Noir.jpg");
+        controller.showResult(result);
 end
 
 
@@ -384,7 +385,7 @@ rule "I am not recovering from work"
         Question question = new Question("Are you going to getting drunk?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -392,8 +393,8 @@ rule "I am going to geting drunk"
     when
         Answer(text == "Yes", questionText == "Are you going to getting drunk?")
     then
-        FinshResult result =  new FinshResult("Go for high octane ZINFANDEL or SHIRAZ", "shiraz-vs-zinfandel.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Go for high octane ZINFANDEL or SHIRAZ", "shiraz-vs-zinfandel.jpg");
+        controller.showResult(result);
 end
 
 
@@ -404,7 +405,7 @@ rule "I am not going to geting drunk"
         Question question = new Question("Are you going to feeling fancy?");
         question.getPossibleAnswers().add("OUI.");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -415,7 +416,7 @@ rule "I am not going to feeling fancy"
         Question question = new Question("Are you daily drinking wine?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -428,7 +429,7 @@ rule "I am not daily drinking wine"
         question.getPossibleAnswers().add("Old!");
         question.getPossibleAnswers().add("New");
         question.getPossibleAnswers().add("What?");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -436,8 +437,8 @@ rule "My collection is old"
     when
         Answer(text == "Old!", questionText == "Is your wine collection new or old world?")
     then
-        FinshResult result =  new FinshResult("Why but anything but BORDEAUX or BURGUNDY", "bourgogne-vs-bordeaux.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Why but anything but BORDEAUX or BURGUNDY", "bourgogne-vs-bordeaux.jpg");
+        controller.showResult(result);
 end
 
 
@@ -448,7 +449,7 @@ rule "My collection is new"
         Question question = new Question("Are you into cults?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -456,8 +457,8 @@ rule "I am into cults"
     when
         Answer(text == "Yes", questionText == "Are you into cults?")
     then
-        FinshResult result =  new FinshResult("Cult classic SINE QUA NON or CAYUSE", "sine_qua_non-vs-cayuse.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Cult classic SINE QUA NON or CAYUSE", "sine_qua_non-vs-cayuse.jpg");
+        controller.showResult(result);
 end
 
 
@@ -466,8 +467,8 @@ rule "I am not into cults"
         Answer(text == "No", questionText == "Are you into cults?") or
         Answer(text == "No", questionText == "Is it order from a window?")
     then
-        FinshResult result =  new FinshResult("Drink a bottle of sun CALIFORNIA CABERNET", "california_cabernet.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Drink a bottle of sun CALIFORNIA CABERNET", "california_cabernet.jpg");
+        controller.showResult(result);
 end
 
 
@@ -478,7 +479,7 @@ rule "It's restaurant"
         Question question = new Question("Is it a fancy restaurant?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 rule "It's not a fancy restaurant"
@@ -488,7 +489,7 @@ rule "It's not a fancy restaurant"
         Question question = new Question("Is it order from a window?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -499,7 +500,7 @@ rule "It's a fancy restaurant"
         Question question = new Question("Can you pronounce the menu?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -507,8 +508,8 @@ rule "I can't pronounce the menu"
     when
         Answer(text == "No", questionText == "Can you pronounce the menu?")
     then
-        FinshResult result =  new FinshResult("Ask for COTES DU RHONE", "Cotes-du-Rhone.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("Ask for COTES DU RHONE", "Cotes-du-Rhone.png");
+        controller.showResult(result);
 end
 
 
@@ -522,7 +523,7 @@ rule "It's a special occasion"
         question.getPossibleAnswers().add("Birthday");
         question.getPossibleAnswers().add("Blind date");
         question.getPossibleAnswers().add("New Years Eve");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -533,7 +534,7 @@ rule "It's anniversary"
         Question question = new Question("Which anniversary?");
         question.getPossibleAnswers().add("1st");
         question.getPossibleAnswers().add("2+");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -541,8 +542,8 @@ rule "It's 2+ anniversary"
     when
         Answer(text == "2+", questionText == "Which anniversary?")
     then
-        FinshResult result =  new FinshResult("Complacency is a bitch MERLOT", "merlot-scheda.png");
-        controller.getFinishResult(result);
+        Result result =  new Result("Complacency is a bitch MERLOT", "merlot-scheda.png");
+        controller.showResult(result);
 end
 
 
@@ -553,7 +554,7 @@ rule "It's birthday"
         Question question = new Question("Somebody who's old person or young?");
         question.getPossibleAnswers().add("Old");
         question.getPossibleAnswers().add("Young");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -563,8 +564,8 @@ rule "It's birthday of young person"
         Answer(text == "Eloping", questionText == "What special occasion is it?") or
         Answer(text == "Blind date", questionText == "What special occasion is it?")
     then
-        FinshResult result =  new FinshResult("Something sweet RIESLING or CHENIN BLANC", "cheninblanc-vs-riesling.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Something sweet RIESLING or CHENIN BLANC", "cheninblanc-vs-riesling.jpg");
+        controller.showResult(result);
 end
 
 
@@ -575,7 +576,7 @@ rule "Is's New Years Eve"
         Question question = new Question("Are you alone at New Years Eve?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
-        controller.getNewQuestion(question);
+        controller.newQuestion(question);
 end
 
 
@@ -583,6 +584,6 @@ rule "Is's New Years Eve not alone"
     when
         Answer(text == "No", questionText == "Are you alone at New Years Eve?")
     then
-        FinshResult result =  new FinshResult("Cheap bubbly SPANISH CAVA", "spanish_cava.jpg");
-        controller.getFinishResult(result);
+        Result result =  new Result("Cheap bubbly SPANISH CAVA", "spanish_cava.jpg");
+        controller.showResult(result);
 end

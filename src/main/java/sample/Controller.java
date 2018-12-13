@@ -1,8 +1,6 @@
 package sample;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXRippler;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -14,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.TextAlignment;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -55,11 +52,11 @@ public class Controller implements Initializable {
         session.fireAllRules();
     }
 
-    public void getNewQuestion(Question question) {
+    public void newQuestion(Question question) {
         label.setText(question.getText());
         pane.getChildren().removeAll(buttons);
         pane.getRowConstraints().subList(3, pane.getRowConstraints().size()).clear();
-        pane.setVgap(45.0);
+        pane.setVgap(60.0);
         buttons.clear();
         int numOfAnswers = question.getPossibleAnswers().size();
         for (int i = 0; i < numOfAnswers; i++) {
@@ -74,7 +71,7 @@ public class Controller implements Initializable {
             });
             buttons.add(button);
             if (i >= 2) {
-                pane.setVgap(22.5);
+                pane.setVgap(15.0);
                 RowConstraints rc = new RowConstraints();
                 rc.setVgrow(Priority.SOMETIMES);
                 rc.setMinHeight(10.0);
@@ -86,7 +83,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void getFinishResult(FinshResult result) {
+    public void showResult(Result result) {
 
         label.setText(result.getText());
         pane.setPadding(new Insets(5, 0, 0, 0));

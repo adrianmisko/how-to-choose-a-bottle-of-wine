@@ -1,17 +1,13 @@
 package sample;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class FinshResult {
+public class Result {
 
     @Getter
     @Setter
@@ -21,7 +17,7 @@ public class FinshResult {
     @Setter
     private Image img;
 
-    public FinshResult(String text, String imgPath) {
+    public Result(String text, String imgPath) {
         this.text = text;
         if (imgPath == null)
             this.img = null;
