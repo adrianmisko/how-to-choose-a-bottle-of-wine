@@ -4,7 +4,7 @@ import sample.Result
 
 global Controller controller;
 
-rule "Who is it for?"
+rule "First question"
     when
 
     then
@@ -15,7 +15,7 @@ rule "Who is it for?"
 end
 
 
-rule "It's for someone else"
+rule "Social gathering"
     when
         Answer(text == "Someone else", questionText == "Who is going to drink it?")
     then
@@ -26,7 +26,7 @@ rule "It's for someone else"
 end
 
 
-rule "I'm at a social gathering"
+rule "Determine type of gathering"
     when
         a: Answer(text == "Yes", questionText == "Are you at a social gathering?")
     then
@@ -40,7 +40,7 @@ rule "I'm at a social gathering"
 end
 
 
-rule "I'm not at a social gathering"
+rule "Wine for wine lovers"
     when
         Answer(text == "Yes", questionText == "Do you know them?") or
         Answer(text == "No", questionText == "Are you at a social gathering?")
@@ -52,7 +52,7 @@ rule "I'm not at a social gathering"
 end
 
 
-rule "They're wine lovers"
+rule "Determie if user knows them"
     when
         Answer(text == "Yes", questionText == "Are they wine lovers?")
         Answer(text == "No", questionText == "Are you at a social gathering?")
@@ -64,7 +64,7 @@ rule "They're wine lovers"
 end
 
 
-rule "I really know them"
+rule "Determine if they're his favourite people in the world"
     when
         Answer(text == "Yes", questionText == "Do you really know them?") or
         (Answer(text == "Yes", questionText == "Are they wine lovers?") and
@@ -77,7 +77,7 @@ rule "I really know them"
 end
 
 
-rule "They are my favourite people in the world"
+rule "User's wine is CALIFORNIA PINOT NOIR"
     when
         Answer(text == "Yes", questionText == "Are they your favourite people in the world? Be honest.") or
         Answer(text == "1st", questionText == "Which anniversary?") or
@@ -88,7 +88,7 @@ rule "They are my favourite people in the world"
 end
 
 
-rule "It is art opening"
+rule "User's wine is 2-BUCK CHUCK"
     when
         Answer(text == "Art opening", questionText == "What kind of gathering?")
     then
@@ -97,7 +97,7 @@ rule "It is art opening"
 end
 
 
-rule "It's beach BBQ"
+rule "User's wine has been confiscated"
     when
         Answer(text == "Beach BBQ", questionText == "What kind of gathering?")
     then
@@ -106,7 +106,7 @@ rule "It's beach BBQ"
 end
 
 
-rule "It's a dinner party"
+rule "Tell who's cooking dinner"
     when
         Answer(text == "Dinner party", questionText == "What kind of gathering?")
     then
@@ -117,7 +117,7 @@ rule "It's a dinner party"
 end
 
 
-rule "They are cooking"
+rule "User's wine is the biggest bottle WITH THE WORDS 'RED BLEND"
     when
         Answer(text == "Them", questionText == "Who is cooking?")
     then
@@ -126,7 +126,7 @@ rule "They are cooking"
 end
 
 
-rule "I am cooking or They aren't wine lovers or I not really know them or They aren't my favourite people in the world"
+rule "User's friends don't deserve wine"
     when
         Answer(text == "Me", questionText == "Who is cooking?") or
         Answer(text == "No", questionText == "Are they wine lovers?") or
@@ -138,7 +138,7 @@ rule "I am cooking or They aren't wine lovers or I not really know them or They 
 end
 
 
-rule "It's bachelor(ette) party"
+rule "User should bring BRING WHISKEY OR VODKA instead of wine"
     when
         Answer(text == "Bachelor(ette) party", questionText == "What kind of gathering?")
     then
@@ -147,7 +147,7 @@ rule "It's bachelor(ette) party"
 end
 
 
-rule "It's get together"
+rule "Determine if user knows people he's meeting"
     when
         Answer(text == "Get together", questionText == "What kind of gathering?")
     then
@@ -158,18 +158,7 @@ rule "It's get together"
 end
 
 
-rule "I know them"
-    when
-        Answer(text == "Yes", questionText == "Do you know them?")
-    then
-        Question question = new Question("Are they wine lovers?");
-        question.getPossibleAnswers().add("Yes");
-        question.getPossibleAnswers().add("No");
-        controller.newQuestion(question);
-end
-
-
-rule "I don't know them"
+rule "User should bring a boring bottle & HOPE NO ONE OPENS IT"
     when
         Answer(text == "No", questionText == "Do you know them?")
     then
@@ -178,7 +167,7 @@ rule "I don't know them"
 end
 
 
-rule "It's for personal use"
+rule "Tell if user is at home"
     when
         Answer(text == "Personal use", questionText == "Who is going to drink it?")
     then
@@ -189,7 +178,7 @@ rule "It's for personal use"
 end
 
 
-rule "I am not at home"
+rule "Get what occasion is it"
     when
         Answer(text == "No", questionText == "Are you at home?")
     then
@@ -203,7 +192,7 @@ rule "I am not at home"
 end
 
 
-rule "It's drinking in public or camping"
+rule "User should get SINGLE SERVE BOX WINE"
     when
         Answer(text == "Drinking in public" || text == "Camping", questionText == "What occasion is it?")
     then
@@ -212,7 +201,7 @@ rule "It's drinking in public or camping"
 end
 
 
-rule "It's dinner"
+rule "Tell if wine is a dinner's main course"
     when
         Answer(text == "Dinner", questionText == "What occasion is it?") or
         Answer(text == "No", questionText == "Are you alone at home?")
@@ -224,10 +213,10 @@ rule "It's dinner"
 end
 
 
-rule "Wine is the main course"
+rule "User should go for something exotic like SANGIOVESE or GRENACHE"
     when
         Answer(text == "Yes", questionText == "Is wine the main course?") or
-        Answer(text == "OUI.", questionText == "Are you going to feeling fancy?") or
+        Answer(text == "OUI.", questionText == "Are you going to feel fancy?") or
         Answer(text == "Yes", questionText == "Are you alone at New Years Eve?")
     then
         Result result =  new Result("Go for something exotic SANGIOVESE or GRENACHE", "grenache-vs-sangiovese.jpg");
@@ -235,7 +224,7 @@ rule "Wine is the main course"
 end
 
 
-rule "Wine is not the main course"
+rule "Tell if dinner is from microvawe"
     when
         Answer(text == "No", questionText == "Is wine the main course?")
     then
@@ -246,7 +235,7 @@ rule "Wine is not the main course"
 end
 
 
-rule "It's dinner from a microwave"
+rule "User should buy 3 LITER BOX WINE"
     when
         Answer(text == "Yes", questionText == "Is it dinner from a microwave?") or
         Answer(text == "Yes", questionText == "Is it order from a window?")
@@ -256,7 +245,7 @@ rule "It's dinner from a microwave"
 end
 
 
-rule "It's not dinner from a microwave"
+rule "Tell if user is cooking with his wine"
     when
         Answer(text == "No", questionText == "Is it dinner from a microwave?")
     then
@@ -267,7 +256,7 @@ rule "It's not dinner from a microwave"
 end
 
 
-rule "I am cooking my wine"
+rule "User should get SAUVIGNON BLANC"
     when
         Answer(text == "Yes", questionText == "Are you cooking /W your wine?")
     then
@@ -276,10 +265,10 @@ rule "I am cooking my wine"
 end
 
 
-rule "I am not cooking my wine"
+rule "Tell if user is kool-aid man"
     when
         Answer(text == "No", questionText == "Are you cooking /W your wine?") or
-        Answer(text == "Yes", questionText == "Are you daily drinking wine?")
+        Answer(text == "Yes", questionText == "Are you drinking wine daily?")
     then
         Question question = new Question("Are you kool-aid man?");
         question.getPossibleAnswers().add("Yes");
@@ -288,7 +277,7 @@ rule "I am not cooking my wine"
 end
 
 
-rule "I am kool-aid man"
+rule "User should buy fruit forward wine ARGENTINIAN MALBEC"
     when
         Answer(text == "Yes", questionText == "Are you kool-aid man?")
     then
@@ -297,7 +286,7 @@ rule "I am kool-aid man"
 end
 
 
-rule "I am not kool-aid man"
+rule "Determine if user used to eat dirt as a child"
     when
         Answer(text == "No", questionText == "Are you kool-aid man?")
     then
@@ -308,7 +297,7 @@ rule "I am not kool-aid man"
 end
 
 
-rule "I used to eat dirt as a child"
+rule "User should get CHINON or BOURGUEIL"
     when
         Answer(text == "Yum", questionText == "Did you use to eat dirt as a child?")
     then
@@ -317,7 +306,7 @@ rule "I used to eat dirt as a child"
 end
 
 
-rule "I didn't use to eat dirt as a child"
+rule "Determine if user had spray butter in his mouth"
     when
         Answer(text == "No", questionText == "Did you use to eat dirt as a child?")
     then
@@ -328,7 +317,7 @@ rule "I didn't use to eat dirt as a child"
 end
 
 
-rule "I had the spray butter in my mouth"
+rule "User should get BUTTERY CHARDONNAY"
     when
         Answer(text == "Yep", questionText == "Did you have the spray butter in your mouth?")
     then
@@ -337,7 +326,7 @@ rule "I had the spray butter in my mouth"
 end
 
 
-rule "I didn't have the spray butter in my mouth"
+rule "User should get out"
     when
         Answer(text == "No!", questionText == "Did you have the spray butter in your mouth?") or
         Answer(text == "What?", questionText == "Is your wine collection new or old world?")
@@ -347,7 +336,7 @@ rule "I didn't have the spray butter in my mouth"
 end
 
 
-rule "I am at home"
+rule "Tell if user is alone at home"
     when
         Answer(text == "Yes", questionText == "Are you at home?")
     then
@@ -358,7 +347,7 @@ rule "I am at home"
 end
 
 
-rule "I am alone at home"
+rule "Tell if user is recovering from work"
     when
         Answer(text == "Yes", questionText == "Are you alone at home?")
     then
@@ -369,7 +358,7 @@ rule "I am alone at home"
 end
 
 
-rule "I am recovering from work"
+rule "User should get PINOT NOIR"
     when
         Answer(text == "Yes", questionText == "Are you recovering from work?")
     then
@@ -378,7 +367,7 @@ rule "I am recovering from work"
 end
 
 
-rule "I am not recovering from work"
+rule "Determine if user is going to get drunk"
     when
         Answer(text == "No", questionText == "Are you recovering from work?")
     then
@@ -389,7 +378,7 @@ rule "I am not recovering from work"
 end
 
 
-rule "I am going to geting drunk"
+rule "User should go for ZINFANDEL or SHIRAZ"
     when
         Answer(text == "Yes", questionText == "Are you going to getting drunk?")
     then
@@ -398,31 +387,31 @@ rule "I am going to geting drunk"
 end
 
 
-rule "I am not going to geting drunk"
+rule "Tell user if going to feel fancy"
     when
         Answer(text == "No", questionText == "Are you going to getting drunk?")
     then
-        Question question = new Question("Are you going to feeling fancy?");
+        Question question = new Question("Are you going to feel fancy?");
         question.getPossibleAnswers().add("OUI.");
         question.getPossibleAnswers().add("No");
         controller.newQuestion(question);
 end
 
 
-rule "I am not going to feeling fancy"
+rule "Determine if user is drinking wine daily"
     when
-        Answer(text == "No", questionText == "Are you going to feeling fancy?")
+        Answer(text == "No", questionText == "Are you going to feel fancy?")
     then
-        Question question = new Question("Are you daily drinking wine?");
+        Question question = new Question("Are you drinking wine daily?");
         question.getPossibleAnswers().add("Yes");
         question.getPossibleAnswers().add("No");
         controller.newQuestion(question);
 end
 
 
-rule "I am not daily drinking wine"
+rule "Determine if user's collection of wine is new or old world"
     when
-        Answer(text == "No", questionText == "Are you daily drinking wine?") or
+        Answer(text == "No", questionText == "Are you drinking wine daily?") or
         Answer(text == "Yes", questionText == "Can you pronounce the menu?")
     then
         Question question = new Question("Is your wine collection new or old world?");
@@ -433,16 +422,16 @@ rule "I am not daily drinking wine"
 end
 
 
-rule "My collection is old"
+rule "User should go for BORDEAUX or BURGUNDY"
     when
         Answer(text == "Old!", questionText == "Is your wine collection new or old world?")
     then
-        Result result =  new Result("Why but anything but BORDEAUX or BURGUNDY", "bourgogne-vs-bordeaux.jpg");
+        Result result =  new Result("Why buy anything but BORDEAUX or BURGUNDY", "bourgogne-vs-bordeaux.jpg");
         controller.showResult(result);
 end
 
 
-rule "My collection is new"
+rule "Determine if user is into cults"
     when
         Answer(text == "New", questionText == "Is your wine collection new or old world?")
     then
@@ -453,7 +442,7 @@ rule "My collection is new"
 end
 
 
-rule "I am into cults"
+rule "User should go for SINE QUA NON or CAYUSE"
     when
         Answer(text == "Yes", questionText == "Are you into cults?")
     then
@@ -462,7 +451,7 @@ rule "I am into cults"
 end
 
 
-rule "I am not into cults"
+rule "User should go for CALIFORNIA CABERNET"
     when
         Answer(text == "No", questionText == "Are you into cults?") or
         Answer(text == "No", questionText == "Is it order from a window?")
@@ -472,7 +461,7 @@ rule "I am not into cults"
 end
 
 
-rule "It's restaurant"
+rule "Tell if it's a fancy restaurant"
     when
         Answer(text == "Restaurant", questionText == "What occasion is it?")
     then
@@ -482,7 +471,7 @@ rule "It's restaurant"
         controller.newQuestion(question);
 end
 
-rule "It's not a fancy restaurant"
+rule "Tell if user's ordering from a window"
     when
         Answer(text == "No", questionText == "Is it a fancy restaurant?")
     then
@@ -493,7 +482,7 @@ rule "It's not a fancy restaurant"
 end
 
 
-rule "It's a fancy restaurant"
+rule "Determine if user can pronounce the menu"
     when
         Answer(text == "Yes", questionText == "Is it a fancy restaurant?")
     then
@@ -504,7 +493,7 @@ rule "It's a fancy restaurant"
 end
 
 
-rule "I can't pronounce the menu"
+rule "User should ask for COTES DU RHONE"
     when
         Answer(text == "No", questionText == "Can you pronounce the menu?")
     then
@@ -513,7 +502,7 @@ rule "I can't pronounce the menu"
 end
 
 
-rule "It's a special occasion"
+rule "Tell what special ocassion is it"
     when
         Answer(text == "Special occasions", questionText == "What occasion is it?")
     then
@@ -527,7 +516,7 @@ rule "It's a special occasion"
 end
 
 
-rule "It's anniversary"
+rule "Determine which anniversary it is"
     when
         Answer(text == "Anniversary", questionText == "What special occasion is it?")
     then
@@ -538,7 +527,7 @@ rule "It's anniversary"
 end
 
 
-rule "It's 2+ anniversary"
+rule "User should go for MERLOT"
     when
         Answer(text == "2+", questionText == "Which anniversary?")
     then
@@ -547,7 +536,7 @@ rule "It's 2+ anniversary"
 end
 
 
-rule "It's birthday"
+rule "Determine age of person who's having birthday"
     when
         Answer(text == "Birthday", questionText == "What special occasion is it?")
     then
@@ -558,7 +547,7 @@ rule "It's birthday"
 end
 
 
-rule "It's birthday of young person"
+rule "User should RIESLING or CHENIN BLANC"
     when
         Answer(text == "Young", questionText == "Somebody who's old person or young?") or
         Answer(text == "Eloping", questionText == "What special occasion is it?") or
@@ -569,7 +558,7 @@ rule "It's birthday of young person"
 end
 
 
-rule "Is's New Years Eve"
+rule "Determine if user is alone at New Years Eve"
     when
         Answer(text == "New Years Eve", questionText == "What special occasion is it?")
     then
@@ -580,7 +569,7 @@ rule "Is's New Years Eve"
 end
 
 
-rule "Is's New Years Eve not alone"
+rule "User should get SPANISH CAVA"
     when
         Answer(text == "No", questionText == "Are you alone at New Years Eve?")
     then
