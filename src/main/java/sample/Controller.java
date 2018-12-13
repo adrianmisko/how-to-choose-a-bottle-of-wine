@@ -86,8 +86,8 @@ public class Controller implements Initializable {
     public void showResult(Result result) {
 
         label.setText(result.getText());
+        pane.getRowConstraints().get(0).setPrefHeight(70.0);
         pane.setPadding(new Insets(5, 0, 0, 0));
-        label.setContentDisplay(ContentDisplay.TOP);
         pane.getChildren().removeAll(buttons);
         buttons.clear();
 
@@ -99,7 +99,7 @@ public class Controller implements Initializable {
             pane.add(new StackPane(), 0, 1, 1, 2);
             StackPane sp = (StackPane)pane.getChildren().get(1);
             sp.getChildren().add(img);
-            sp.setAlignment(img, Pos.CENTER);
+            StackPane.setAlignment(img, Pos.CENTER);
 
         }
 
